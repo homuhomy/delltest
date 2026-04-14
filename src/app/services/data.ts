@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class Data {
-  private isBrowser = typeof window !== 'undefined' && !window.localStorage;
+  private isBrowser = typeof window !== 'undefined' && !!window.localStorage;
 
   setLocalStorage(key: string, value: string) {
     if (this.isBrowser) {
@@ -14,8 +14,9 @@ export class Data {
 
   getLocalStorage(key:string){
     if(this.isBrowser){
-      const item = localStorage.getItem(key);
-      return item;
+      console.log('true');
+      const item : any = localStorage.getItem(key);
+      return JSON.parse(item);
     }
     return null;
   }

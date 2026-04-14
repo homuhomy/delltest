@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Api } from '../../services/api';
 import { SharedModules } from '../../shared/shared-modules';
@@ -20,11 +20,11 @@ export class ReportsPage implements OnInit{
   public reportList: ReportItem[] = [];
   public dataSource: any = new MatTableDataSource(this.reportList);
   public displayedColumns: string[] = ['id','title', 'category', 'date'];
-  cdr: any;
 
   constructor (
     private api: Api,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ){}
 
   async ngOnInit(){
