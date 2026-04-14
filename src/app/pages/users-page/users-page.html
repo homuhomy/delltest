@@ -1,1 +1,17 @@
-<p>users-page works!</p>
+<div class="user-body">
+    <div class="user-container">
+        @for (user of userList; track $index;) {
+        <mat-card class="user-card" appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>{{user.name | convert: 'upperCase'}}</mat-card-title>
+            </mat-card-header>
+
+            <mat-card-content>
+                <p>Email: {{ user.email }}</p>
+                <p>Phone: {{ user.phone }}</p>
+                <p>Height: {{ user.height | convert: 'height' : 'meter' }}</p>
+            </mat-card-content>
+        </mat-card>
+    }
+    </div>
+</div>

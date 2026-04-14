@@ -1,155 +1,20 @@
 .card-container {
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     flex-direction: column;
-
     margin-top: 1.5em;
-
 }
-
- 
 
 .full-width {
-
     width: 100%;
-
     margin-bottom: 0.3em;
-
 }
-
- 
 
 button {
-
     margin: 0.5;
-
 }
-
- 
 
 mat-card-header {
-
     margin-bottom: 1.5em;
-
-}
-
- 
-
-Login-page.spec.ts
-
- 
-
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
- 
-
-import { LoginPage } from './login-page';
-
- 
-
-describe('LoginPage', () => {
-
-  let component: LoginPage;
-
-  let fixture: ComponentFixture<LoginPage>;
-
- 
-
-  beforeEach(async () => {
-
-    await TestBed.configureTestingModule({
-
-      imports: [LoginPage],
-
-    }).compileComponents();
-
- 
-
-    fixture = TestBed.createComponent(LoginPage);
-
-    component = fixture.componentInstance;
-
-    await fixture.whenStable();
-
-  });
-
- 
-
-  it('should create', () => {
-
-    expect(component).toBeTruthy();
-
-  });
-
-});
-
- 
-
- 
-
- 
-
-Login-page.ts
-
- 
-
-import { Component } from '@angular/core';
-
-import { SharedModules } from '../../shared/shared-modules';
-
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { Router } from '@angular/router';
-
- 
-
-@Component({
-
-  selector: 'app-login-page',
-
-  imports: [...SharedModules],
-
-  templateUrl: './login-page.html',
-
-  styleUrl: './login-page.scss',
-
-})
-
-export class LoginPage {
-
-  public loginForm: FormGroup;
-
- 
-
-  constructor(
-
-    private formBuilder: FormBuilder,
-
-    private router: Router
-
-  ){
-
-    this.loginForm = this.formBuilder.group ({
-
-      email: ['', [Validators.required, Validators.email]],
-
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/)]]
-
-    })
-
-  }
-
- 
-
-  async onSubmit(form: any){
-
- 
-
-  }
-
 }

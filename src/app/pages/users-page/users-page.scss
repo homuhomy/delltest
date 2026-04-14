@@ -1,0 +1,17 @@
+.user-body {
+    padding: 16px;
+    margin: 30px;
+
+    .user-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        flex-wrap: wrap;
+
+        .user-card {
+            margin: 1em;
+            max-width: 600px;
+        }
+    }
+}
