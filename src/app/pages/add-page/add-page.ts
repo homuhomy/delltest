@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCardHeader } from "@angular/material/card";   
 import { SharedModules } from "../../shared/shared-modules";
-import { RouterLink, Router } from "@angular/router";
+import { RouterLink, Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Api } from '../../services/api';
 import { Misc } from '../../services/misc';
@@ -12,19 +12,41 @@ import { Misc } from '../../services/misc';
   templateUrl: './add-page.html',
   styleUrl: './add-page.scss',
 })
-export class AddPage {
+export class AddPage implements OnInit{
   public reportForm: FormGroup;
+  public id: any;
   constructor(
     private formBuilder: FormBuilder,
     private apiService: Api,
     private router: Router,
-    private misc: Misc
+    private misc: Misc,
+    private activatedRoute: ActivatedRoute
+    
   ){
     this.reportForm = this.formBuilder.group({
       title: ['', Validators.required],
       date: ['', Validators.required],
       category: ['', Validators.required]
-    })
+    });
+  }
+
+  async ngOnInit(){
+    this.id = this.activatedRoute.snapshot.paramMap.get('id'); //id taken from the route
+    if (this.id) {
+      try{
+        let response: any = await this.apiService.httpGet('/reports/' + this.id);
+        if(response.success){
+          let report = response.data;
+          this.reportForm.setValue({
+            title: report.title,
+            category: report.category,
+            date: this.parseApiDate(report.date)
+          })
+        }
+      }catch(error: any){
+        console.error(error);
+      }
+    }
   }
 
   //paste fuction here
@@ -82,7 +104,11 @@ export class AddPage {
           ...rawData,
           date: this.formatDateToString(rawData.date) ?? rawData.date
         };
-        let response = await this.apiService.httpPost('/reports/add', reportData);
+        if(this.id){
+          var response = await this.apiService.httpPost('/reports/update/' + this.id, reportData, 'put');
+        } else{
+          var response = await this.apiService.httpPost('/reports/add', reportData);
+        }
         if(response){
           console.log('Report submitted successfully');
           this.misc.openSnackBar('Report submitted successfully', 'OK');

@@ -30,7 +30,7 @@ export class Api {
       })
     }
 
-    httpPost(path: string, payload: any) {
+    httpPost(path: string, payload: any, method?: string) {
       let fullURL: string = this.baseURL + path;
       let token = this.dataService.getLocalStorage('token');
       let headers: any;
@@ -42,11 +42,19 @@ export class Api {
           .set('Content-Type', 'application/json')};
       }
 return new Promise((resolve, reject)=>{
-        this.httpClient.post(fullURL, payload, headers)
-        .subscribe({
-          next: (response: any) => {resolve(response)},
-          error: (error: any) => {reject(error)}
-        });
+  if(method == 'put'){
+    this.httpClient.put(fullURL, payload, headers)
+          .subscribe({
+            next: (response: any) => {resolve(response)},
+            error: (error: any) => {reject(error)}
+          });
+  } else {
+    this.httpClient.post(fullURL, payload, headers)
+          .subscribe({
+            next: (response: any) => {resolve(response)},
+            error: (error: any) => {reject(error)}
+          });
+        }
       })
     }
 }
