@@ -1,0 +1,17 @@
+.chart-body{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.chart-container{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+canvas{
+    margin-top:30px;
+    border: solid 1px #888;
+}
