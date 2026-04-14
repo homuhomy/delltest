@@ -58,5 +58,40 @@ export class ChartsPage {
 
     ]
   }
+
+  public pieChartType: ChartType = 'pie';
+
+  public pieChartOptions: ChartConfiguration['options'] = {
+    plugins: {
+      title: {
+        display: true,
+        position: 'top',
+        padding: 20,
+        text: 'Category Distribution',
+        font: { size: 18, weight: 'bold' }
+      },
+
+      legend: {
+        display: true,
+        position: 'bottom',
+        labels: { usePointStyle: true, pointStyle: 'circle', padding: 30 }
+      }
+    },
+    layout: { padding: 30 }
+  };
+
+  public pieChartData: ChartConfiguration['data'] = {
+    labels: this.dataService.lineChartData().pieChartLabels,
+    datasets: [
+      {
+        data: this.dataService.lineChartData().pieChart,
+        backgroundColor: ['#e387eb', '#3498db', '#2ecc71', '#f1c40f'],
+        borderColor: ['#ffffff'],
+        borderWidth: 2
+      }
+    ]
+  };
+
+
 }
 

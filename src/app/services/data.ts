@@ -10,7 +10,8 @@ export class Data {
     return{
       lineChartA: [65, 55, 70, 40],
       lineChartB: [65, 15, 70, 20],
-      pieChart: [60, 80, 10, 10]
+      pieChart: [60, 80, 10, 10],
+      pieChartLabels: ['Product A', 'Product B', 'Product C', 'Product D']
     }
   }
 
