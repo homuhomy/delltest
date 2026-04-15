@@ -25,7 +25,30 @@ export class MapPage implements AfterViewInit{
     
   // };
 
-  ngAfterViewInit(): void {
+  async getGeolocation(){
+    if(navigator.geolocation){
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition((position: any) => {
+        const coords = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        resolve(coords);
+      }, (err: any) => { reject(err)});
+    })
+  }
+    else{
+      console.log('no location provided')
+      return null;
+    }
+  }
+
+
+
+  async ngAfterViewInit() {
+    let coords: any = await this.getGeolocation() ;
+    console.log(coords);
+
     this.map = L.map('map').setView([3.1468059, 101.6882442], 16);
 
     // Fix default icon paths
@@ -40,6 +63,13 @@ export class MapPage implements AfterViewInit{
       attribution: '© OpenStreetMap contributors'
     }).addTo(this.map);
 
-    let marker = L.marker([3.1468059, 101.6882442]).addTo(this.map);
+    let marker = L.marker([coords.lat, coords.lng]).addTo(this.map);
+    let popup = marker.bindPopup("<b>SVT WAS HERE</b><br/>jk");
+
+    marker.on('click', () => {
+      popup.openPopup();
+    });
+
+    this.map.flyTo([coords.lat, coords.lng]);
   }
 }
