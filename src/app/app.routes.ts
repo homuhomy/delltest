@@ -5,6 +5,7 @@ import { ReportsPage } from './pages/reports-page/reports-page';
 import { authGuard } from './guards/auth-guard';
 import { AddPage } from './pages/add-page/add-page';
 import { ChartsPage } from './pages/charts-page/charts-page';
+import { MapPage } from './pages/map-page/map-page';
 
 export const routes: Routes = [
     {
@@ -38,5 +39,9 @@ export const routes: Routes = [
    {
     path: 'charts',
     component: ChartsPage
+   },
+   {
+    path: 'map',
+    component: MapPage
    }
 ];
