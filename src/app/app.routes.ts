@@ -2,6 +2,9 @@ import { Routes } from '@angular/router';
 import { UsersPage } from './pages/users-page/users-page';
 import { LoginPage } from './pages/login-page/login-page';
 import { ReportsPage } from './pages/reports-page/reports-page';
+import { authGuard } from './guards/auth-guard';
+import { AddPage } from './pages/add-page/add-page';
+import { ChartsPage } from './pages/charts-page/charts-page';
 
 export const routes: Routes = [
     {
@@ -19,6 +22,21 @@ export const routes: Routes = [
    },
    {
     path: 'reports',
-    component: ReportsPage
+    component: ReportsPage,
+    canActivate: [authGuard]
+   },
+   {
+    path: 'add',
+    component: AddPage,
+    canActivate: [authGuard]
+   },
+   {
+    path: 'update/:id',
+    component: AddPage,
+    canActivate: [authGuard]
+   },
+   {
+    path: 'charts',
+    component: ChartsPage
    }
 ];

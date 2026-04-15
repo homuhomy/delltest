@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Api } from '../../services/api';
 import { SharedModules } from '../../shared/shared-modules';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,19 +12,19 @@ interface ReportItem {
 
 @Component({
   selector: 'app-reports-page',
-  imports: [...SharedModules],
+  imports: [...SharedModules, RouterLink],
   templateUrl: './reports-page.html',
   styleUrl: './reports-page.scss',
 })
 export class ReportsPage implements OnInit{
   public reportList: ReportItem[] = [];
   public dataSource: any = new MatTableDataSource(this.reportList);
-  public displayedColumns: string[] = ['id','title', 'category', 'date'];
-  cdr: any;
+  public displayedColumns: string[] = ['id','title', 'category', 'date', 'actions'];
 
   constructor (
     private api: Api,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ){}
 
   async ngOnInit(){
