@@ -35,6 +35,7 @@ export class LoginPage {
       const response: any = await this.apiService.httpPost('/auth/login', loginData);
       if (response.success) {
         let token = response.token;
+        this.misc.publishLoginEvent(true);
         this.dataService.setLocalStorage('token', token);
         this.router.navigateByUrl('/users');
       } else{

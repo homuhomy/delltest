@@ -5,4 +5,10 @@
     <a routerLink="reports" mat-button class="toolbar-link">Reports</a>
     <a routerLink="charts" mat-button class="toolbar-link">Charts</a>
     <a routerLink="map" mat-button class="toolbar-link">Map</a>
+    @if(showLogoutButton){
+        <button mat-button (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+            <mat-label>Logout</mat-label>
+        </button>
+    }
 </mat-toolbar>

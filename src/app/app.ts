@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Toolbar } from "./components/toolbar/toolbar";
 import { Misc } from './services/misc';
+import { Data } from './services/data';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,10 @@ import { Misc } from './services/misc';
 
 export class App implements OnInit {
   protected readonly title = signal('angular-inter');
-  constructor (private misc: Misc) {}
+  constructor (private misc: Misc, private data: Data) {}
   
   ngOnInit(): void {
     this.misc.initNetworkListener();
+    //this.data.clearStorage();
   }
 }
